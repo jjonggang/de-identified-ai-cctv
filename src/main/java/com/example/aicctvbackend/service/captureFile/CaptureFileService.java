@@ -22,11 +22,12 @@ import java.util.UUID;
 public class CaptureFileService {
     private final CaptureFileRepository captureFileRepository;
 
-    public void fileWrite(MultipartFile file) throws Exception{
+    public Long fileWrite(MultipartFile file) throws Exception{
         CaptureFile inputFile = new CaptureFile();
 
         // 프로젝트의 경로가 담긴다.
         String projectPath = System.getProperty("user.dir") + "/spring-boot-de-identified-ai-cctv" + "/src/main/resources/static/files";
+
         log.info(System.getProperty("user.dir"));
         //\src\main\resources\static\files
         // 파일을 생성할 건데, projectPath 경로에 넣을 거고 이름은 두번째 인자처럼 담긴다.
@@ -42,7 +43,8 @@ public class CaptureFileService {
 
         inputFile.setFileName(fileName);
         inputFile.setFilePath("http://ec2-3-36-163-212.ap-northeast-2.compute.amazonaws.com:8080/files/"+ fileName);
-        captureFileRepository.save(inputFile);
+        CaptureFile savedFile = captureFileRepository.save(inputFile);
+        return savedFile.getFileId();
     }
 
     public Path load(String filename){

@@ -18,9 +18,9 @@ public class CaptureFileApiController {
     private final CaptureFileService captureFileService;
 
     @PostMapping("/file/capture/upload")
-    public void captureUpload(@RequestParam("file") MultipartFile file) throws Exception{
-
-        captureFileService.fileWrite(file);
+    public Long captureUpload(@RequestParam("file") MultipartFile file) throws Exception{
+        Long fileId = captureFileService.fileWrite(file);
+        return fileId;
     }
 
     @GetMapping("/file/capture/download")
