@@ -38,10 +38,8 @@ public class CaptureFileService {
         file.transferTo(saveFile);
 
         inputFile.setFileName(fileName);
-        inputFile.setFilePath("/files/"+ fileName);
+        inputFile.setFilePath("http://ec2-3-36-163-212.ap-northeast-2.compute.amazonaws.com:8080/files/"+ fileName);
         captureFileRepository.save(inputFile);
-
-
     }
 
     public Path load(String filename){
