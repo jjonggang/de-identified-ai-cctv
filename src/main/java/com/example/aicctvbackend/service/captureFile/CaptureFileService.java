@@ -3,6 +3,7 @@ package com.example.aicctvbackend.service.captureFile;
 import com.example.aicctvbackend.domain.captureFile.CaptureFile;
 import com.example.aicctvbackend.domain.captureFile.CaptureFileRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CaptureFileService {
@@ -24,7 +26,8 @@ public class CaptureFileService {
         CaptureFile inputFile = new CaptureFile();
 
         // 프로젝트의 경로가 담긴다.
-        String projectPath = System.getProperty("user.dir") + "/src/main/resources/static/files";
+        String projectPath = System.getProperty("user.dir") + "spring-boot-de-identified-ai-cctv" + "/src/main/resources/static/files";
+        log.info(System.getProperty("user.dir"));
         //\src\main\resources\static\files
         // 파일을 생성할 건데, projectPath 경로에 넣을 거고 이름은 두번째 인자처럼 담긴다.
         // 들어올 파일을 넣을 빈 껍데기 생성
