@@ -19,6 +19,7 @@ public class CaptureFileApiController {
 
     @PostMapping("/file/capture/upload")
     public void captureUpload(@RequestParam("file") MultipartFile file) throws Exception{
+
         captureFileService.fileWrite(file);
     }
 

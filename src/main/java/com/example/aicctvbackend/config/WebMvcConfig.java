@@ -1,4 +1,4 @@
-package com.example.aicctvbackend.token.config;
+package com.example.aicctvbackend.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

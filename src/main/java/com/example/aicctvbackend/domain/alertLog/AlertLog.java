@@ -22,6 +22,7 @@ import javax.persistence.*;
 public class AlertLog extends CreateTimeEntity {
     @Id
     @JsonProperty("log_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long logId;
     @JsonProperty("user_id")
     private Long userId;
