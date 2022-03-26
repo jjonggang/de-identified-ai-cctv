@@ -15,4 +15,5 @@ public class AlertLogService {
         AlertLog alertLog = alertLogRepository.findByLogId(logId);
         return alertLog;
     }
+
 }

@@ -10,13 +10,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Slf4j
-@RequiredArgsConstructor
-@RestController
-@RequestMapping(value = "/api/v1")
+@Slf4j // log 보여주기 lof.info()
+@RequiredArgsConstructor // private final을 사용하기 위한
+@RestController // Rest Api Controller
+@RequestMapping(value = "/api/v1") //
 public class AlertLogApiController {
     private final AlertLogService alertLogService;
 
+    // Get Mapping
     @GetMapping("/alert-log/get/{logId}")
     public ResponseEntity<?> getAlertLogById(@PathVariable Long logId) {
         AlertLog tempLog = alertLogService.getAlertLogById(logId);
