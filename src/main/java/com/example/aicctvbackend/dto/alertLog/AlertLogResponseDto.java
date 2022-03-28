@@ -27,10 +27,10 @@ public class AlertLogResponseDto {
     private EmergencyType emergencyType;
     private CaptureFile captureFile;
     private LocalDateTime createdDate;
-    private String upperLeftx;
-    private String upperLefty;
-    private String bottomRightx;
-    private String bottomRighty;
+    private Double upperLeftx;
+    private Double upperLefty;
+    private Double bottomRightx;
+    private Double bottomRighty;
 
 
     public AlertLogResponseDto(AlertLog entity){

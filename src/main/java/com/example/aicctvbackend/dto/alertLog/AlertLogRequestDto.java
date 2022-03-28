@@ -15,8 +15,8 @@ import lombok.Setter;
 public class AlertLogRequestDto {
     private Long emergencyId;
     private Long captureFileId;
-    private String upperLeftx;
-    private String upperLefty;
-    private String bottomRightx;
-    private String bottomRighty;
+    private Double upperLeftx;
+    private Double upperLefty;
+    private Double bottomRightx;
+    private Double bottomRighty;
 }

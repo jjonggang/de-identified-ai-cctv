@@ -35,11 +35,11 @@ public class AlertLog extends CreateTimeEntity {
     @JsonProperty("file_id")
     private CaptureFile captureFile;
     @JsonProperty("upper_leftx")
-    private String upperLeftx;
+    private Double upperLeftx;
     @JsonProperty("upper_lefty")
-    private String upperLefty;
+    private Double upperLefty;
     @JsonProperty("bottom_rightx")
-    private String bottomRightx;
+    private Double bottomRightx;
     @JsonProperty("bottom_righty")
-    private String bottomRighty;
+    private Double bottomRighty;
 }
