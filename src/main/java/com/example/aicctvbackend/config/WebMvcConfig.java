@@ -2,11 +2,19 @@ package com.example.aicctvbackend.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
     private final long MAX_AGE_SECS = 3600;
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/capture-file/view/**")
+                .addResourceLocations("file:///home/ec2-user/app/step1/capture-files/")
+                .setCachePeriod(20);
+    }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
