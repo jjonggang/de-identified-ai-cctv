@@ -12,7 +12,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/capture-file/view/**")
-                .addResourceLocations("file:///home/ec2-user/app/step1/capture-files/")
+                .addResourceLocations("file:///home/ec2-user/app/step1/capture-file/")
                 .setCachePeriod(20);
     }
 
