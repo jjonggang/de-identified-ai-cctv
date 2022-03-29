@@ -26,7 +26,8 @@ public class CaptureFileService {
         CaptureFile inputFile = new CaptureFile();
 
         // 프로젝트의 경로가 담긴다.
-        String projectPath = System.getProperty("user.dir") + "/spring-boot-de-identified-ai-cctv" + "/src/main/resources/static/files";
+//        String projectPath = System.getProperty("user.dir") + "/spring-boot-de-identified-ai-cctv" + "/src/main/resources/static/files";
+        String projectPath = System.getProperty("user.dir") + "/capture-files";
 
         log.info(System.getProperty(projectPath));
         //\src\main\resources\static\files
@@ -42,13 +43,14 @@ public class CaptureFileService {
         file.transferTo(saveFile);
 
         inputFile.setFileName(fileName);
-        inputFile.setFilePath("http://ec2-3-36-163-212.ap-northeast-2.compute.amazonaws.com:8080/files/"+ fileName);
+        inputFile.setFilePath("http://ec2-3-36-163-212.ap-northeast-2.compute.amazonaws.com:8080/capture-files/"+ fileName);
         CaptureFile savedFile = captureFileRepository.save(inputFile);
         return savedFile.getFileId();
     }
 
     public Path load(String filename){
-        return Paths.get(System.getProperty("user.dir") + "/src/main/resources/static/files").resolve(filename);
+//        return Paths.get(System.getProperty("user.dir") + "/spring-boot-de-identified-ai-cctv" +"/src/main/resources/static/files").resolve(filename);
+        return Paths.get(System.getProperty("user.dir") + "/capture-files").resolve(filename);
     }
 
     public Resource loadAsResource(String filename) {
