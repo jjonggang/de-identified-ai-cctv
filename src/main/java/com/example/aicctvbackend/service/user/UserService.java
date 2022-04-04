@@ -10,17 +10,19 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
 
     public User create(final User user){
-        if(user == null || user.getEmail()==null){
+        if(user == null || user.getEmail() == null){
             throw new RuntimeException("Invalid arguments");
         }
         final String email = user.getEmail();
-        if(userRepository.existsByEmail(email)){
+        if (userRepository.existsByEmail(email)){
             log.warn("Email already exists {}", email);
             throw new RuntimeException("Email already exists");
         }
+
         return userRepository.save(user);
     }
 
