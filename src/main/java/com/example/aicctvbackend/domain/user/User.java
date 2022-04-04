@@ -6,9 +6,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Setter
@@ -21,11 +19,12 @@ import java.sql.Timestamp;
 public class User extends CreateTimeEntity {
     @Id
     @JsonProperty("user_id")
-    private Long userID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userId;
     @JsonProperty("user_name")
-    private String userName;
-    @JsonProperty("user_password")
-    private String userPassword;
-    @JsonProperty("user_email")
-    private String userEmail;
+    private String username;
+    @JsonProperty("password")
+    private String password;
+    @JsonProperty("email")
+    private String email;
 }
