@@ -18,7 +18,7 @@ public class TokenProvider {
 
     public String create(User user){
         // 기한 1일
-        Date expiryDate = Date.from(Instant.now().plus(1, ChronoUnit.DAYS));
+        Date expiryDate = Date.from(Instant.now().plus(30, ChronoUnit.DAYS));
 //        {
 //            "alg":"HS512"
 //        }.
