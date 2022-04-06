@@ -35,6 +35,6 @@ public class UserService {
                 encoder.matches(password, originalUser.getPassword())){
             return originalUser;
         }
-        return userRepository.findByEmailAndPassword(email, password);
+        return null;
     }
 }
