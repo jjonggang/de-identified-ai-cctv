@@ -4,6 +4,7 @@ import com.example.aicctvbackend.domain.user.User;
 import com.example.aicctvbackend.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -26,7 +27,14 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User getByCredentials(final String email, final String password){
+    public User getByCredentials(final String email, final String password, final PasswordEncoder encoder){
+        final User originalUser = userRepository.findByEmail(email);
+
+        //matches 메서드를 이용해 패스워드가 같은지 확인
+        if(originalUser != null &&
+                encoder.matches(password, originalUser.getPassword())){
+            return originalUser;
+        }
         return userRepository.findByEmailAndPassword(email, password);
     }
 }

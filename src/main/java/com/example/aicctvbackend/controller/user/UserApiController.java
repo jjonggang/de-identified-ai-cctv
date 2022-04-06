@@ -8,6 +8,8 @@ import com.example.aicctvbackend.service.user.UserService;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,8 @@ public class UserApiController {
 
     private final UserService userService;
 
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @PostMapping("/no-login/auth/signup")
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDto){
         try{
@@ -30,7 +34,7 @@ public class UserApiController {
             User user = User.builder()
                     .email(userDto.getEmail())
                     .username(userDto.getUsername())
-                    .password(userDto.getPassword())
+                    .password(passwordEncoder.encode(userDto.getPassword()))
                     .build();
             // 서비스를 이용해 리포지터리에 사용자 저장
             User registeredUser = userService.create(user);
@@ -55,7 +59,8 @@ public class UserApiController {
     public ResponseEntity<?> authenticate(@RequestBody UserDto userDto) {
         User user = userService.getByCredentials(
                 userDto.getEmail(),
-                userDto.getPassword()
+                userDto.getPassword(),
+                passwordEncoder
         );
 
         if(user != null) {
@@ -63,7 +68,6 @@ public class UserApiController {
             final UserDto responseUserDTO = UserDto.builder()
                     .email(user.getEmail())
                     .userId(user.getUserId())
-                    .username(user.getUsername())
                     .token(token)
                     .build();
             return ResponseEntity.ok().body(responseUserDTO);
