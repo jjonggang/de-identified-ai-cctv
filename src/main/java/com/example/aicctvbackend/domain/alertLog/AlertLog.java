@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -34,6 +35,11 @@ public class AlertLog extends CreateTimeEntity {
     @JoinColumn(name = "file_id")
     @JsonProperty("file_id")
     private CaptureFile captureFile;
+    @JsonProperty("created_date")
+    private LocalDateTime createdDate;
+    private Long classroom;
+    @JsonProperty("participant_number")
+    private Long participantNumber;
     @JsonProperty("upper_leftx")
     private Double upperLeftx;
     @JsonProperty("upper_lefty")

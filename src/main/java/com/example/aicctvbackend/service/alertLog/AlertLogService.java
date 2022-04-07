@@ -8,7 +8,10 @@ import com.example.aicctvbackend.domain.emergencyType.EmergencyTypeRepository;
 import com.example.aicctvbackend.dto.alertLog.AlertLogRequestDto;
 import com.example.aicctvbackend.dto.alertLog.AlertLogResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -32,5 +35,10 @@ public class AlertLogService {
         alertLog.setBottomRighty(alertLogRequestDto.getBottomRighty());
         alertLogRepository.save(alertLog);
         return alertLog;
+    }
+
+    public List<AlertLog> getAlertLogByUserId(Long userId, Pageable pageable) {
+        List<AlertLog> alertLogList = alertLogRepository.findByUserIdOrderByCreatedDateDesc(userId, pageable);
+        return alertLogList;
     }
 }

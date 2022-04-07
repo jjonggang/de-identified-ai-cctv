@@ -69,6 +69,4 @@ public class WebSocketHandler extends TextWebSocketHandler {
         });
     }
 
-
-
 }
