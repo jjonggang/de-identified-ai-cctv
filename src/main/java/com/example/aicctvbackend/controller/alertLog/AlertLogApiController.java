@@ -46,14 +46,8 @@ public class AlertLogApiController {
     @GetMapping("/alert-log/get-all/user")
     public ResponseEntity<?> getAlertLogByUserId(@AuthenticationPrincipal String strUserId, @PageableDefault(page = 0, size=10) Pageable pageable){
         Long userId = Long.parseLong(strUserId);
-        List<AlertLog> logList = alertLogService.getAlertLogByUserId(userId, pageable);
-        List<AlertLogResponseDto> dtos = logList.stream()
-                .map(log -> new AlertLogResponseDto(log))
-                .collect(Collectors.toList());
-        ResponsePageDto<AlertLogResponseDto> response = ResponsePageDto.<AlertLogResponseDto>builder()
-                .lastPage((long) (logList.size()/10))
-                .data(dtos)
-                .build();
+        ResponsePageDto<AlertLogResponseDto> response = alertLogService.getAlertLogByUserId(userId, pageable);
+
         return ResponseEntity.ok().body(response);
     }
 
