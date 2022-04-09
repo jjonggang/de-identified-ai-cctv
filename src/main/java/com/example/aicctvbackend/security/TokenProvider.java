@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -14,7 +15,8 @@ import java.time.temporal.ChronoUnit;
 @Slf4j
 @Service
 public class TokenProvider {
-    private static final String SECRET_KEY = "capstone-cctv";
+    @Value("${secret.key}")
+    private String SECRET_KEY;
 
     public String create(User user){
         // 기한 1일
