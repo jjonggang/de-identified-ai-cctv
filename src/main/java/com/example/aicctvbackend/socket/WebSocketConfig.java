@@ -18,7 +18,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(webSocketHandler, "/log-alert").setAllowedOrigins("*");
+        registry.addHandler(webSocketHandler, "/no-login/log-alert").setAllowedOrigins("*");
     }
 
 }

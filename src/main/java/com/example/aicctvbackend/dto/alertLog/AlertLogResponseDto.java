@@ -11,10 +11,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,6 +23,8 @@ public class AlertLogResponseDto {
     private Long userId;
     private EmergencyType emergencyType;
     private CaptureFile captureFile;
+    private Long classroom;
+    private Long participantNumber;
     private LocalDateTime createdDate;
     private Double upperLeftx;
     private Double upperLefty;
@@ -37,6 +36,8 @@ public class AlertLogResponseDto {
         this.userId = entity.getUserId();
         this.emergencyType = entity.getEmergencyType();
         this.captureFile = entity.getCaptureFile();
+        this.classroom = entity.getClassroom();
+        this.participantNumber = entity.getParticipantNumber();
         this.createdDate = entity.getCreatedDate();
         this.upperLeftx = entity.getUpperLeftx();
         this.upperLefty = entity.getUpperLefty();

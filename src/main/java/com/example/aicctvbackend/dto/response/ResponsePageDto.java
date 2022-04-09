@@ -1,5 +1,7 @@
 package com.example.aicctvbackend.dto.response;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,11 +13,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ResponseDto<T> {
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+public class ResponsePageDto<T> {
     private String error;
-<<<<<<< HEAD
+    private Long lastPage;
     private List<T> data;
-=======
-    private List<T> data;// Todo를 하나만 반환하는 경우보다 리스트를 반환하는 경우가 많으므로 리스트로 데이터를 반환하도록 한다.
->>>>>>> origin/main
 }
