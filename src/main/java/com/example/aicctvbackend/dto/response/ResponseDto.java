@@ -13,9 +13,5 @@ import java.util.List;
 @Data
 public class ResponseDto<T> {
     private String error;
-<<<<<<< HEAD
-    private List<T> data;
-=======
     private List<T> data;// Todo를 하나만 반환하는 경우보다 리스트를 반환하는 경우가 많으므로 리스트로 데이터를 반환하도록 한다.
->>>>>>> origin/main
 }
