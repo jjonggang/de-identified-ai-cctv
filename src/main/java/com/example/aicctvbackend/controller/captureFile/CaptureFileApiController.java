@@ -1,6 +1,7 @@
 package com.example.aicctvbackend.controller.captureFile;
 
 import com.example.aicctvbackend.bank.CaptureFileService2;
+import com.example.aicctvbackend.service.awsS3.AwsS3Service;
 import com.example.aicctvbackend.service.captureFile.CaptureFileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,18 +19,20 @@ public class CaptureFileApiController {
 
 //    private final CaptureFileService2 captureFileService;
     private final CaptureFileService captureFileService;
+    private final AwsS3Service awsS3Service;
 
     @PostMapping("/file/capture/upload")
-    public Long captureUpload(@RequestParam("file") MultipartFile file) throws Exception{
-        Long fileId = captureFileService.upload(file, "static");
+    public Long captureUpload2(@RequestParam("file") MultipartFile file) throws Exception{
+        String fileUrl = awsS3Service.upload2(file, "capture-file");
+        Long fileId = captureFileService.insertCaptureFileList(fileUrl);
         return fileId;
     }
 
-    @GetMapping("/file/capture/download")
-    public ResponseEntity<Resource> serveFile(@RequestParam(value="filename") String filename) {
-
-        Resource file = captureFileService.loadAsResource(filename);
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-    }
+//    @GetMapping("/file/capture/download")
+//    public ResponseEntity<Resource> serveFile(@RequestParam(value="filename") String filename) {
+//
+//        Resource file = captureFileService.loadAsResource(filename);
+//        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+//                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+//    }
 }

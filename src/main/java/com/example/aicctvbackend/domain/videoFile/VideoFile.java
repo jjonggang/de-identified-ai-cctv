@@ -1,6 +1,7 @@
-package com.example.aicctvbackend.domain.captureFile;
+package com.example.aicctvbackend.domain.videoFile;
 
 import com.example.aicctvbackend.domain.CreateTimeEntity;
+import com.example.aicctvbackend.domain.captureFile.CaptureFile;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -8,16 +9,15 @@ import lombok.*;
 
 import javax.persistence.*;
 
-
 @Getter
 @Setter
-@Entity
 @Builder
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-@Table(name = "capture_file")
-public class CaptureFile extends CreateTimeEntity {
+@Table(name = "video_file")
+public class VideoFile extends CreateTimeEntity {
     @Id
     @JsonProperty("file_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +27,11 @@ public class CaptureFile extends CreateTimeEntity {
     @JsonProperty("file_path")
     private String filePath;
 
-    public static CaptureFile createCaptureFile(String fileName, String fileUrl) {
-        CaptureFile captureFile = new CaptureFile();
-        captureFile.setFileName(fileName);
-        captureFile.setFilePath(fileUrl);
-        return captureFile;
+    public static VideoFile createVideoFile(String fileName, String fileUrl) {
+        VideoFile videoFile = new VideoFile();
+        videoFile.setFileName(fileName);
+        videoFile.setFilePath(fileUrl);
+        return videoFile;
     }
+
 }

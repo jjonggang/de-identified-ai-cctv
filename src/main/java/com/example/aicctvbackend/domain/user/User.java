@@ -24,4 +24,6 @@ public class User {
     private String username;
     private String email;
     private String password;
+    @JsonProperty("phone_number")
+    private String phoneNumber;
 }
