@@ -35,6 +35,7 @@ public class UserApiController {
                     .email(userDto.getEmail())
                     .username(userDto.getUsername())
                     .password(passwordEncoder.encode(userDto.getPassword()))
+                    .phoneNumber(userDto.getPhoneNumber())
                     .build();
             // 서비스를 이용해 리포지터리에 사용자 저장
             User registeredUser = userService.create(user);
@@ -42,6 +43,7 @@ public class UserApiController {
                     .email(registeredUser.getEmail())
                     .userId(registeredUser.getUserId())
                     .username(registeredUser.getUsername())
+                    .phoneNumber(userDto.getPhoneNumber())
                     .build();
 
             return ResponseEntity.ok().body(responseUserDto);
@@ -66,6 +68,7 @@ public class UserApiController {
         if(user != null) {
             final String token = tokenProvider.create(user);
             final UserDto responseUserDTO = UserDto.builder()
+                    .phoneNumber(user.getPhoneNumber())
                     .email(user.getEmail())
                     .userId(user.getUserId())
                     .token(token)

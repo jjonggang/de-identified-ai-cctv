@@ -2,7 +2,9 @@ package com.example.aicctvbackend.dto.alertLog;
 
 import com.example.aicctvbackend.domain.alertLog.AlertLog;
 import com.example.aicctvbackend.domain.captureFile.CaptureFile;
+import com.example.aicctvbackend.domain.classroom.Classroom;
 import com.example.aicctvbackend.domain.emergencyType.EmergencyType;
+import com.example.aicctvbackend.domain.videoFile.VideoFile;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -20,11 +22,11 @@ import java.util.List;
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AlertLogResponseDto {
-    private Long userId;
     private EmergencyType emergencyType;
     private CaptureFile captureFile;
-    private Long classroom;
-    private Long participantNumber;
+    private VideoFile videoFile;
+    private Classroom classroom;
+    private int numOfParticipant;
     private LocalDateTime createdDate;
     private Double upperLeftx;
     private Double upperLefty;
@@ -33,11 +35,11 @@ public class AlertLogResponseDto {
 
 
     public AlertLogResponseDto(AlertLog entity){
-        this.userId = entity.getUserId();
         this.emergencyType = entity.getEmergencyType();
         this.captureFile = entity.getCaptureFile();
+        this.videoFile = entity.getVideoFile();
         this.classroom = entity.getClassroom();
-        this.participantNumber = entity.getParticipantNumber();
+        this.numOfParticipant = entity.getNumOfParticipant();
         this.createdDate = entity.getCreatedDate();
         this.upperLeftx = entity.getUpperLeftx();
         this.upperLefty = entity.getUpperLefty();
