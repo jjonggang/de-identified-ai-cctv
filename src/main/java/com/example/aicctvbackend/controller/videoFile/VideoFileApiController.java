@@ -21,7 +21,7 @@ public class VideoFileApiController {
     private final VideoFileService videoFileService;
     private final AwsS3Service awsS3Service;
 
-    @PostMapping("/file/video/upload")
+    @PostMapping("/file/video")
     public Long captureUpload2(@RequestParam("file") MultipartFile file) throws Exception{
         String fileUrl = awsS3Service.upload2(file, "video-file");
         Long fileId = videoFileService.insertVideoFileList(fileUrl);

@@ -27,8 +27,8 @@ import java.util.stream.Collectors;
 public class AlertLogApiController {
     private final AlertLogService alertLogService;
     private final WebSocketHandler webSocketHandler;
-//
-    @PostMapping("/alert-log/post")
+
+    @PostMapping("/alert-log")
     public ResponseEntity<?> postAlertLog(@RequestBody AlertLogRequestDto alertLogRequestDto){
         AlertLog inputAlert = alertLogService.postAlertLog(alertLogRequestDto);
 //        alertLogService.sendSms(inputAlert);
@@ -37,20 +37,12 @@ public class AlertLogApiController {
     }
 
     // Get Mapping
-    @GetMapping("/alert-log/get/{logId}")
+    @GetMapping("/alert-log/{logId}")
     public ResponseEntity<?> getAlertLogById(@PathVariable Long logId) {
         AlertLog tempLog = alertLogService.getAlertLogById(logId);
         AlertLogResponseDto dto = new AlertLogResponseDto(tempLog);
         return ResponseEntity.ok().body(dto);
     }
-
-//    @GetMapping("/alert-log/get-all/user")
-//    public ResponseEntity<?> getAlertLogByUserId(@AuthenticationPrincipal String strUserId, @PageableDefault(page = 0, size=10) Pageable pageable){
-//        Long userId = Long.parseLong(strUserId);
-//        ResponsePageDto<AlertLogResponseDto> response = alertLogService.getAlertLogByUserId(userId, pageable);
-//
-//        return ResponseEntity.ok().body(response);
-//    }
 
     // 유저 관리 반에 대한 alert log 가져오기
     @GetMapping("/alert-log/list")

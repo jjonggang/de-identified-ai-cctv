@@ -76,7 +76,7 @@ public class AlertLogService {
 
         int totalCount = alertLogList.size();
         int listCount = 10;
-        int totalPageCount = (totalCount / listCount)-1;
+        int totalPageCount = (totalCount / listCount);
 
         if (totalCount % listCount > 0) {
             totalPageCount++;
@@ -89,31 +89,8 @@ public class AlertLogService {
                 .data(dtos)
                 .build();
         return response;
-
     }
 
-
-//    public ResponsePageDto<AlertLogResponseDto> getAlertLogByUserId(Long userId, Pageable pageable) {
-//        List<AlertLog> alertLogList = alertLogRepository.findByUserIdOrderByCreatedDateDesc(userId, pageable);
-//        Long pageCount = alertLogRepository.CountByUserId(userId);
-//        log.info(String.valueOf(pageCount));
-//        Long totalCount = pageCount;
-//
-//        Long listCount = (long)10;
-//        Long totalPage = (totalCount / listCount)-1;
-//
-//        if (totalCount % listCount > 0) {
-//            totalPage++;
-//        }
-//        List<AlertLogResponseDto> dtos = alertLogList.stream()
-//                .map(log -> new AlertLogResponseDto(log))
-//                .collect(Collectors.toList());
-//        ResponsePageDto<AlertLogResponseDto> response = ResponsePageDto.<AlertLogResponseDto>builder()
-//                .lastPage((long)totalPage)
-//                .data(dtos)
-//                .build();
-//        return response;
-//    }
 
     public void sendSms(AlertLog inputAlert) {
 

@@ -17,11 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping(value = "/api/v1")
 public class CaptureFileApiController {
 
-//    private final CaptureFileService2 captureFileService;
     private final CaptureFileService captureFileService;
     private final AwsS3Service awsS3Service;
 
-    @PostMapping("/file/capture/upload")
+    @PostMapping("/file/capture")
     public Long captureUpload2(@RequestParam("file") MultipartFile file) throws Exception{
         String fileUrl = awsS3Service.upload2(file, "capture-file");
         Long fileId = captureFileService.insertCaptureFileList(fileUrl);
