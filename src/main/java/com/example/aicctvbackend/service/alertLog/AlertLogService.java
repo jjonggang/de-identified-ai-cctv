@@ -76,7 +76,7 @@ public class AlertLogService {
 
         int totalCount = alertLogList.size();
         int listCount = 10;
-        int totalPageCount = (totalCount / listCount)-1;
+        int totalPageCount = (totalCount / listCount);
 
         if (totalCount % listCount > 0) {
             totalPageCount++;
