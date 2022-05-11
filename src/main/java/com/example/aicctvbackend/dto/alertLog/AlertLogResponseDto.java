@@ -22,6 +22,7 @@ import java.util.List;
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AlertLogResponseDto {
+    private Long alertLogId;
     private EmergencyType emergencyType;
     private CaptureFile captureFile;
     private VideoFile videoFile;
@@ -35,6 +36,7 @@ public class AlertLogResponseDto {
 
 
     public AlertLogResponseDto(AlertLog entity){
+        this.alertLogId = entity.getLogId();
         this.emergencyType = entity.getEmergencyType();
         this.captureFile = entity.getCaptureFile();
         this.videoFile = entity.getVideoFile();
