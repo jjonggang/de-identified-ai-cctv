@@ -1,7 +1,6 @@
-package com.example.aicctvbackend.domain.videoFile;
+package com.example.aicctvbackend.domain.amazonS3.videoFile;
 
 import com.example.aicctvbackend.domain.CreateTimeEntity;
-import com.example.aicctvbackend.domain.captureFile.CaptureFile;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

@@ -1,4 +1,4 @@
-package com.example.aicctvbackend.controller.videoFile;
+package com.example.aicctvbackend.controller.amazonS3.videoFile;
 
 import com.example.aicctvbackend.dto.alertLog.AlertLogResponseDto;
 import com.example.aicctvbackend.dto.response.ResponsePageDto;

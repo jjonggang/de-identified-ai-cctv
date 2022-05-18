@@ -1,4 +1,4 @@
-package com.example.aicctvbackend.controller.captureFile;
+package com.example.aicctvbackend.controller.amazonS3.captureFile;
 
 import com.example.aicctvbackend.bank.CaptureFileService2;
 import com.example.aicctvbackend.service.awsS3.AwsS3Service;

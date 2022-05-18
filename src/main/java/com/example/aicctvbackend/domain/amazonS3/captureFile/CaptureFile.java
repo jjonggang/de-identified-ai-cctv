@@ -1,4 +1,4 @@
-package com.example.aicctvbackend.domain.captureFile;
+package com.example.aicctvbackend.domain.amazonS3.captureFile;
 
 import com.example.aicctvbackend.domain.CreateTimeEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;

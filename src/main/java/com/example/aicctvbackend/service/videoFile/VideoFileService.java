@@ -1,13 +1,10 @@
 package com.example.aicctvbackend.service.videoFile;
 
-import com.example.aicctvbackend.domain.captureFile.CaptureFile;
-import com.example.aicctvbackend.domain.captureFile.CaptureFileRepository;
-import com.example.aicctvbackend.domain.videoFile.VideoFile;
-import com.example.aicctvbackend.domain.videoFile.VideoFileRepository;
+import com.example.aicctvbackend.domain.amazonS3.videoFile.VideoFile;
+import com.example.aicctvbackend.domain.amazonS3.videoFile.VideoFileRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -24,4 +21,6 @@ public class VideoFileService {
         VideoFile savedFile = videoFileRepository.save(videoFile);
         return savedFile.getFileId();
     }
+
+
 }

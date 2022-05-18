@@ -2,12 +2,11 @@ package com.example.aicctvbackend.service.alertLog;
 
 import com.example.aicctvbackend.domain.alertLog.AlertLog;
 import com.example.aicctvbackend.domain.alertLog.AlertLogRepository;
-import com.example.aicctvbackend.domain.captureFile.CaptureFileRepository;
-import com.example.aicctvbackend.domain.classroom.Classroom;
+import com.example.aicctvbackend.domain.amazonS3.captureFile.CaptureFileRepository;
 import com.example.aicctvbackend.domain.classroom.ClassroomRepository;
 import com.example.aicctvbackend.domain.emergencyType.EmergencyTypeRepository;
 import com.example.aicctvbackend.domain.managerOfClassroom.ManagerOfClassroomRepository;
-import com.example.aicctvbackend.domain.videoFile.VideoFileRepository;
+import com.example.aicctvbackend.domain.amazonS3.videoFile.VideoFileRepository;
 import com.example.aicctvbackend.dto.alertLog.AlertLogRequestDto;
 import com.example.aicctvbackend.dto.alertLog.AlertLogResponseDto;
 import com.example.aicctvbackend.dto.response.ResponsePageDto;

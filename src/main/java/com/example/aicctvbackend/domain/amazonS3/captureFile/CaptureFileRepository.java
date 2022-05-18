@@ -1,4 +1,4 @@
-package com.example.aicctvbackend.domain.captureFile;
+package com.example.aicctvbackend.domain.amazonS3.captureFile;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

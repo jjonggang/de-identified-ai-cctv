@@ -1,10 +1,11 @@
 package com.example.aicctvbackend.service.awsS3;
 
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.example.aicctvbackend.domain.captureFile.CaptureFile;
-import com.example.aicctvbackend.domain.captureFile.CaptureFileRepository;
+import com.example.aicctvbackend.domain.amazonS3.captureFile.CaptureFileRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,6 +42,21 @@ public class AwsS3Service {
         return upload2(uploadFile, dirName);
     }
 
+//    //파일 삭제
+//    public void deleteFile(String fileName){
+//        DeleteObjectRequest request = new DeleteObjectRequest(bucket, fileName);
+//        amazonS3Client.deleteObject(request);
+//    }
+
+    // delete file
+    public void deleteFile(String fileName) {
+        log.info("file name : "+ fileName);
+        try {
+            amazonS3Client.deleteObject(new DeleteObjectRequest(bucket, fileName));
+        } catch (AmazonServiceException e) {
+            System.err.println(e.getErrorMessage());
+        }
+    }
 
 
     private String upload2(File uploadFile, String dirName) {

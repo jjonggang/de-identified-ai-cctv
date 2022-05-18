@@ -1,7 +1,7 @@
 package com.example.aicctvbackend.bank;
 
-import com.example.aicctvbackend.domain.captureFile.CaptureFile;
-import com.example.aicctvbackend.domain.captureFile.CaptureFileRepository;
+import com.example.aicctvbackend.domain.amazonS3.captureFile.CaptureFile;
+import com.example.aicctvbackend.domain.amazonS3.captureFile.CaptureFileRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
