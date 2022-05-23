@@ -31,7 +31,7 @@ public class AlertLogApiController {
     @PostMapping("/alert-log")
     public ResponseEntity<?> postAlertLog(@RequestBody AlertLogRequestDto alertLogRequestDto){
         AlertLog inputAlert = alertLogService.postAlertLog(alertLogRequestDto);
-        alertLogService.sendSms(inputAlert);
+//        alertLogService.sendSms(inputAlert);
         webSocketHandler.sendMessageToAll(new TextMessage(inputAlert.getLogId().toString())); // 소켓메시지로 문제상황 알리기
         return ResponseEntity.ok().body(inputAlert);
     }
