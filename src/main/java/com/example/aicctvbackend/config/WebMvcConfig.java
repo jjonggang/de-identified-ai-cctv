@@ -20,7 +20,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         // origin이 http://localhost:3000에 대해
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000", "http://www.cyber-capstone.kro.kr", "http://localhost:5000")
+                .allowedOrigins("http://localhost:3000", "http://www.cyber-capstone.kro.kr", "http://localhost:5000", "https://www.cyber-capstone.kro.kr")
                 // GET, POST, PATCH, DELETE, OPTIONS 메서드 허용
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
