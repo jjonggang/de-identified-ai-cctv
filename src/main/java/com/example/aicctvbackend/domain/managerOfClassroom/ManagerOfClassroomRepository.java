@@ -9,4 +9,8 @@ public interface ManagerOfClassroomRepository extends JpaRepository<ManagerOfCla
 
     @Query(nativeQuery = true, value = "SELECT classroom_id FROM manager_of_classroom WHERE user_id=?1")
     List<Long> findClassroomIdByUserId(Long userId);
+
+    List<Long> findByClassroomId(Long classroomId);
+    @Query(nativeQuery = true, value = "SELECT user_id FROM manager_of_classroom WHERE classroom_id=?1")
+    List<Long> findUserIdByClassroomId(Long classroomId);
 }

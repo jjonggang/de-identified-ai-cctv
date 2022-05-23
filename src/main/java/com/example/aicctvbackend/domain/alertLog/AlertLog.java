@@ -53,7 +53,8 @@ public class AlertLog extends CreateTimeEntity {
     private Double bottomRightx;
     @JsonProperty("bottom_righty")
     private Double bottomRighty;
-
+    @JsonProperty("camera_id")
+    private Long cameraId;
 
 
 }

@@ -3,10 +3,14 @@ package com.example.aicctvbackend.service.alertLog;
 import com.example.aicctvbackend.domain.alertLog.AlertLog;
 import com.example.aicctvbackend.domain.alertLog.AlertLogRepository;
 import com.example.aicctvbackend.domain.amazonS3.captureFile.CaptureFileRepository;
+import com.example.aicctvbackend.domain.camera.Camera;
+import com.example.aicctvbackend.domain.camera.CameraRepository;
 import com.example.aicctvbackend.domain.classroom.ClassroomRepository;
 import com.example.aicctvbackend.domain.emergencyType.EmergencyTypeRepository;
 import com.example.aicctvbackend.domain.managerOfClassroom.ManagerOfClassroomRepository;
 import com.example.aicctvbackend.domain.amazonS3.videoFile.VideoFileRepository;
+import com.example.aicctvbackend.domain.user.User;
+import com.example.aicctvbackend.domain.user.UserRepository;
 import com.example.aicctvbackend.dto.alertLog.AlertLogRequestDto;
 import com.example.aicctvbackend.dto.alertLog.AlertLogResponseDto;
 import com.example.aicctvbackend.dto.response.ResponsePageDto;
@@ -14,11 +18,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
+import org.apache.velocity.runtime.Runtime;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +40,10 @@ public class AlertLogService {
     private final VideoFileRepository videoFileRepository;
     private final ClassroomRepository classroomRepository;
     private final ManagerOfClassroomRepository managerOfClassroomRepository;
+
+    private final UserRepository userRepository;
+
+    private final CameraRepository cameraRepository;
 
     @Value("${coolsms.api.key}")
     private String apiKey;
@@ -57,6 +67,8 @@ public class AlertLogService {
                 .bottomRighty(alertLogRequestDto.getBottomRighty())
                 .upperLeftx(alertLogRequestDto.getUpperLeftx())
                 .upperLefty(alertLogRequestDto.getUpperLefty())
+                .cameraId(alertLogRequestDto.getCameraId())
+                .createdDate(LocalDateTime.now())
                 .build();
         alertLogRepository.save(alertLog);
         return alertLog;
@@ -96,21 +108,34 @@ public class AlertLogService {
         Message coolsms = new Message(apiKey, apiSecret);
         HashMap<String, String> params = new HashMap<String, String>();
 
+        Long cameraId = inputAlert.getCameraId();
+        Camera camera = cameraRepository.findByCameraId(cameraId);
+        List<Long> userIds = managerOfClassroomRepository.findUserIdByClassroomId(camera.getClassroomId());
+        List<User> users = userRepository.findAllById(userIds);
+        if(users == null){
+            throw new RuntimeException("카메라가 설치된 학급에 대한 관리자가 지정돼있지 않습니다. ");
+        }
+        for (User user : users) {
+            params.put("to", user.getPhoneNumber());
+            params.put("from", "01050596837");
+            params.put("type", "LMS");
+            params.put("text", inputAlert.getEmergencyType().getTypeNameKor() + "발생!" + "\n\n" + "학급: " + inputAlert.getClassroom().getClassroomName()
+                    + "\n발생 시각: " + inputAlert.getCreatedDate() + "\n인원: " + inputAlert.getNumOfParticipant() + "\n위험상황 캡쳐 파일: " + inputAlert.getCaptureFile().getFilePath());
+
+            params.put("app_version", "test app 1.2");
+            log.info(String.valueOf(params));
+            try {
+                JSONObject obj = (JSONObject) coolsms.send(params);
+                System.out.println(obj.toString());
+            } catch (CoolsmsException e) {
+                System.out.println(e.getMessage());
+                System.out.println(e.getCode());
+            }
+        }
+
 //        inputAlert
 
-        params.put("to", "");
-        params.put("from", "01050596837");
-        params.put("type", "SMS");
-        params.put("text", "문제상황 발생");
-        params.put("app_version", "test app 1.2");
 
-        try {
-            JSONObject obj = (JSONObject) coolsms.send(params);
-            System.out.println(obj.toString());
-        } catch (CoolsmsException e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getCode());
-        }
     }
 
 }

@@ -11,6 +11,7 @@ import lombok.Setter;
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AlertLogRequestDto {
+    private Long cameraId;
     private Long emergencyId;
     private Long captureFileId;
     private Long videoFileId;
