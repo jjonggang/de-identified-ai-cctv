@@ -15,6 +15,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @Entity
 @Builder
 @NoArgsConstructor

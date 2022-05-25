@@ -30,7 +30,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
         log.info(session.getId()+"연결");
     }
 
-
     // 접속이 끊어진 사용자가 발생하면 호출되는 메서드.
     // clients 객체에서 접속이 끊어진 아이디 값을 제거하도록 한다.
     @Override
@@ -68,5 +67,4 @@ public class WebSocketHandler extends TextWebSocketHandler {
             }
         });
     }
-
 }

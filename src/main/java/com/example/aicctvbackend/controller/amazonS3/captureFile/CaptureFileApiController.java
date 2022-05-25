@@ -27,6 +27,13 @@ public class CaptureFileApiController {
         return fileId;
     }
 
+    @PostMapping("/file/stream")
+    public void streamUpload(@RequestParam("file") MultipartFile file) throws Exception{
+        String fileUrl = awsS3Service.upload2(file, "stream");
+
+        // fileUrl 보내기
+    }
+
 //    @GetMapping("/file/capture/download")
 //    public ResponseEntity<Resource> serveFile(@RequestParam(value="filename") String filename) {
 //

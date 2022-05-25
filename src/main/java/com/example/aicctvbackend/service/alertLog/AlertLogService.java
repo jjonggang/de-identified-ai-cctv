@@ -13,6 +13,7 @@ import com.example.aicctvbackend.domain.user.User;
 import com.example.aicctvbackend.domain.user.UserRepository;
 import com.example.aicctvbackend.dto.alertLog.AlertLogRequestDto;
 import com.example.aicctvbackend.dto.alertLog.AlertLogResponseDto;
+import com.example.aicctvbackend.dto.alertLog.AlertLogUpdateRequestDto;
 import com.example.aicctvbackend.dto.response.ResponsePageDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -138,4 +139,23 @@ public class AlertLogService {
 
     }
 
+    public AlertLog updateAlertLog(AlertLogUpdateRequestDto alertLogUpdateRequestDto) {
+        AlertLog alertLog = alertLogRepository.findByLogId(alertLogUpdateRequestDto.getLogId());
+        AlertLog newAlertLog = AlertLog.builder()
+                .logId(alertLog.getLogId())
+                .emergencyType(alertLog.getEmergencyType())
+                .captureFile(alertLog.getCaptureFile())
+                .videoFile(videoFileRepository.findByFileId(alertLogUpdateRequestDto.getVideoId()))
+                .classroom(classroomRepository.findByClassroomId(alertLog.getClassroom().getClassroomId()))
+                .numOfParticipant(alertLog.getNumOfParticipant())
+                .bottomRightx(alertLog.getBottomRightx())
+                .bottomRighty(alertLog.getBottomRighty())
+                .upperLeftx(alertLog.getUpperLeftx())
+                .upperLefty(alertLog.getUpperLefty())
+                .cameraId(alertLog.getCameraId())
+                .createdDate(alertLog.getCreatedDate())
+                .build();
+        log.info("update");
+        return alertLogRepository.save(newAlertLog);
+    }
 }

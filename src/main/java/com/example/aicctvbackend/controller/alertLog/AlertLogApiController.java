@@ -3,6 +3,7 @@ package com.example.aicctvbackend.controller.alertLog;
 import com.example.aicctvbackend.domain.alertLog.AlertLog;
 import com.example.aicctvbackend.dto.alertLog.AlertLogRequestDto;
 import com.example.aicctvbackend.dto.alertLog.AlertLogResponseDto;
+import com.example.aicctvbackend.dto.alertLog.AlertLogUpdateRequestDto;
 import com.example.aicctvbackend.dto.response.ResponsePageDto;
 import com.example.aicctvbackend.service.alertLog.AlertLogService;
 import com.example.aicctvbackend.socket.WebSocketHandler;
@@ -33,7 +34,7 @@ public class AlertLogApiController {
         AlertLog inputAlert = alertLogService.postAlertLog(alertLogRequestDto);
 //        alertLogService.sendSms(inputAlert);
         webSocketHandler.sendMessageToAll(new TextMessage(inputAlert.getLogId().toString())); // 소켓메시지로 문제상황 알리기
-        return ResponseEntity.ok().body(inputAlert);
+        return ResponseEntity.ok().body(inputAlert.getLogId());
     }
 
     // Get Mapping
@@ -51,6 +52,14 @@ public class AlertLogApiController {
         ResponsePageDto<AlertLogResponseDto> response = alertLogService.getAlertLogList(userId, pageable);
 
         return ResponseEntity.ok().body(response);
+    }
+
+    @PutMapping("/alert-log")
+    public ResponseEntity<?> getAlertLogByUserId(@RequestBody AlertLogUpdateRequestDto alertLogUpdateRequestDto){
+        AlertLog inputAlert = alertLogService.updateAlertLog(alertLogUpdateRequestDto);
+//        webSocketHandler.sendMessageToAll(new TextMessage(inputAlert.getLogId().toString())); // 소켓메시지로 문제상황 알리기
+        AlertLogResponseDto dto = new AlertLogResponseDto(inputAlert);
+        return ResponseEntity.ok().body(dto);
     }
 
 }
